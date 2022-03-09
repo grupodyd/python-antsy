@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
-
 setup(
     name='python-antsy',
-    version='0.0.1',
+    version='0.0.2',
+    description="Python package for integrating Antsy in other applications",
     license='MIT',
     author="Juan F. Duque",
     author_email='jfduque@gmail.com',
@@ -11,6 +11,7 @@ setup(
     package_dir={'': 'src'},
     url='https://github.com/grupodyd/python-antsy',
     keywords='antsy',
+    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*",
     install_requires=[
           'requests',
       ],
