@@ -1,2 +1,16 @@
 # python-antsy
-Paquete para integracion de Antsy en otras aplicaciones en lenguaje Python
+ Python package for integration of Antsy in other applications
+
+Installing
+============
+
+```bash
+pip install python-antsy
+```
+
+Usage
+=====
+```python3
+from python-antsy import Antsy
+```
+
