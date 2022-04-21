@@ -6,7 +6,7 @@ setup(
     description="Python package for integrating Antsy in other applications",
     license='MIT',
     author="Juan F. Duque",
-    author_email='jfduque@gmail.com',
+    author_email='jfelipe@grupodyd.com',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     url='https://github.com/grupodyd/python-antsy',
