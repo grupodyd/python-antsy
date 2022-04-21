@@ -5,12 +5,12 @@ on:
     types: [published]
 
 jobs:
-  deploy:
+  build_and_package:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: '3.x'
     - name: Install dependencies
@@ -19,6 +19,7 @@ jobs:
         pip install setuptools wheel twine
     - name: Build packages
       run: |
+        python setup.py build
         python setup.py sdist bdist_wheel
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@master
