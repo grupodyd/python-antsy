@@ -2,8 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='python-antsy',
-    version='0.0.4',
+    version='0.0.6',
     description="Python package for integrating Antsy in other applications",
+    long_description=open("README.md").read().strip(),
+    long_description_content_type="text/markdown",
     license='MIT',
     author="Juan F. Duque",
     author_email='jfelipe@grupodyd.com',
