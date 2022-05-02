@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='python-antsy',
     version='0.0.7',
-    description="Python package for integrating Antsy in other applications",
+    description="Antsy API Python Client",
     long_description=open("README.md").read().strip(),
     long_description_content_type="text/markdown",
     license='MIT',
