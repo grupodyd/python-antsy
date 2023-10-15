@@ -1,22 +1,22 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='python-antsy',
-    version='0.0.7',
+    name="python-antsy",
+    version="0.0.8",
     description="Antsy API Python Client",
     long_description=open("README.md").read().strip(),
     long_description_content_type="text/markdown",
-    license='MIT',
+    license="MIT",
     author="Juan F. Duque",
-    author_email='jfelipe@grupodyd.com',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
-    url='https://github.com/grupodyd/python-antsy',
-    keywords='antsy',
+    author_email="jfelipe@grupodyd.com",
+    packages=find_packages("src"),
+    package_dir={"": "src"},
+    url="https://github.com/grupodyd/python-antsy",
+    keywords="antsy",
     python_requires=">=3.6",
     install_requires=[
-          'requests',
-      ],
+        "requests",
+    ],
     classifiers=[
         "Development Status :: 1 - Planning",
         "Environment :: Console",
@@ -33,6 +33,5 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
-      ],
-
+    ],
 )
