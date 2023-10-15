@@ -1,24 +1,31 @@
 from setuptools import setup, find_packages
 
+__version__ = "0.0.8"
+
 setup(
-    name="python-antsy",
-    version="0.0.8",
-    description="Antsy API Python Client",
+    name="antsy",
+    version=__version__,
+    description="Antsy API Client",
     long_description=open("README.md").read().strip(),
     long_description_content_type="text/markdown",
     license="MIT",
     author="Juan F. Duque",
     author_email="jfelipe@grupodyd.com",
-    packages=find_packages("src"),
-    package_dir={"": "src"},
-    url="https://github.com/grupodyd/python-antsy",
+    packages=find_packages(exclude=["tests", "tests.*"]),
+    include_package_data=True,
+    url="https://www.grupodyd.com",
+    project_urls={
+        "Source": "https://github.com/grupodyd/python-antsy",
+        "Tracker": "https://github.com/grupodyd/python-antsy/issues",
+    },
     keywords="antsy",
-    python_requires=">=3.6",
+    python_requires=">=3.8.0",
     install_requires=[
-        "requests",
+        "httpx[http2] >= 0.24.0, < 1",
+        "pydantic >= 2, < 3",
     ],
     classifiers=[
-        "Development Status :: 1 - Planning",
+        "Development Status :: 2 - Pre-Alpha",
         "Environment :: Console",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
@@ -26,12 +33,11 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
 )
