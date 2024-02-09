@@ -19,9 +19,9 @@ setup(
         "Tracker": "https://github.com/grupodyd/python-antsy/issues",
     },
     keywords="antsy",
-    python_requires=">=3.8.0",
+    python_requires=">=3.9.0",
     install_requires=[
-        "httpx[http2] >= 0.24.0, < 1",
+        "httpx[http2] >= 0.26.0, < 1",
         "pydantic >= 2, < 3",
     ],
     classifiers=[
@@ -33,10 +33,10 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
