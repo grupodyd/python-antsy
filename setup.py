@@ -4,6 +4,7 @@ __version__ = "0.0.9"
 
 setup(
     name="python-antsy",
+    packages=find_packages(exclude=["tests", "tests.*"]),
     version=__version__,
     description="Antsy API Client",
     long_description=open("README.md").read().strip(),
@@ -11,7 +12,6 @@ setup(
     license="MIT",
     author="Juan F. Duque",
     author_email="jfelipe@grupodyd.com",
-    packages=find_packages(exclude=["tests", "tests.*"]),
     include_package_data=True,
     url="https://www.grupodyd.com",
     project_urls={
