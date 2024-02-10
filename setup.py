@@ -23,6 +23,7 @@ setup(
     install_requires=[
         "httpx[http2] >= 0.26.0, < 1",
         "pydantic >= 2, < 3",
+        "python-dateutil >= 2.8.2, < 3",
     ],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",

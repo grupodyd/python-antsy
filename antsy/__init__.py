@@ -6,6 +6,7 @@ import httpx
 
 from .namespaces.appointments import AppointmentsAPI
 from .namespaces.auth import AuthAPI
+from .namespaces.customers import CustomersAPI
 
 
 logging.basicConfig(level=logging.WARNING)
@@ -21,6 +22,7 @@ class Antsy:
 
         self._appointments = AppointmentsAPI(self, version)
         self._auth = AuthAPI(self, version)
+        self._customers = CustomersAPI(self, version)
 
     def _fetch_access_token(self, refresh_token: str) -> str:
         try:
@@ -43,3 +45,7 @@ class Antsy:
     @property
     def auth(self):
         return self._auth
+
+    @property
+    def customers(self):
+        return self._customers
