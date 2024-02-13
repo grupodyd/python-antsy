@@ -12,13 +12,17 @@ from .namespaces.customers import CustomersAPI
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
+__version__ = "0.0.12"
+
 
 class Antsy:
     def __init__(self, refresh_token: str, version="v1") -> None:
         self.base_url = "https://api.antsy.app"
         self.version = version
         self.access_token = self._fetch_access_token(refresh_token)
-        self.client = httpx.Client(http2=True, headers={"Authorization": f"Bearer {self.access_token}"})
+        self.client = httpx.Client(
+            http2=True, headers={"Authorization": f"Bearer {self.access_token}", "User-Agent": f"python-antsy/{__version__}"}
+        )
 
         self._appointments = AppointmentsAPI(self, version)
         self._auth = AuthAPI(self, version)

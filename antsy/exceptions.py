@@ -18,6 +18,10 @@ class CustomerCreateRequiredField(AntsyError):
     fmt = "Field '{field}' is required when creating a customer"
 
 
+class CustomerSearchRequiredField(AntsyError):
+    fmt = "Field '{field}' is required when searching for a customer"
+
+
 class CustomerAlreadyExists(AntsyError):
     fmt = "Customer already exists"
 
