@@ -50,8 +50,7 @@ class CustomersAPI:
 
         for key, value in request_data.items():
             if value is None:
-                logger.error("'%s' cannot be None", key)
-                return None
+                raise exceptions.CustomerCreateRequiredField(field=key)
 
         # Optional fields
         request_data["email"] = kwargs.get("email")
@@ -65,7 +64,7 @@ class CustomersAPI:
         request_data["receive_sms"] = kwargs.get("receive_sms")
 
         try:
-            response = self.antsy_client.client.post(full_url, data=request_data).json()
+            response = self.antsy_client.client.post(full_url, json=request_data).json()
         except HTTPStatusError as exc:
             logger.error("Error: %s", exc)
             return None
