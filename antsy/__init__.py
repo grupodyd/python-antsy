@@ -12,14 +12,23 @@ from .namespaces.customers import CustomersAPI
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-__version__ = "0.0.12"
+__version__ = "0.0.13"
 
 
 class Antsy:
-    def __init__(self, refresh_token: str, version="v1") -> None:
+    def __init__(self, refresh_token: str = None, access_token: str = None, version="v1") -> None:
         self.base_url = "https://api.antsy.app"
         self.version = version
-        self.access_token = self._fetch_access_token(refresh_token)
+
+        # Only fetch access token if refresh_token is provided and access_token is None
+        if access_token:
+            self.access_token = access_token
+        elif refresh_token:
+            self.access_token = self._fetch_access_token(refresh_token)
+        else:
+            # Handle the case where neither access nor refresh token is provided
+            raise ValueError("Either access_token or refresh_token must be provided")
+
         self.client = httpx.Client(
             http2=True, headers={"Authorization": f"Bearer {self.access_token}", "User-Agent": f"python-antsy/{__version__}"}
         )

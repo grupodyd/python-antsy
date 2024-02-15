@@ -16,7 +16,7 @@ class AppointmentsAPI:
         self.antsy_client = antsy_client
         self.base_path = f"appointments/{version}"
 
-    def get_queue(self, queue_uid: str) -> Optional[List[QueueAppointment]]:
+    def get_queue_appointments(self, queue_uid: str) -> Optional[List[QueueAppointment]]:
         full_url = f"{self.antsy_client.base_url}/{self.base_path}/queue/{queue_uid}"
 
         try:
