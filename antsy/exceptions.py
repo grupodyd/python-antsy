@@ -64,3 +64,11 @@ class CustomerInvalidLanguage(AntsyError):
 
 class CustomerInvalidReceiveSMS(AntsyError):
     fmt = "Invalid receive SMS: '{receive_sms}'"
+
+
+class SiteNotFound(AntsyError):
+    fmt = "Site not found: '{site_uid}'"
+
+
+class OrganizationNotFound(AntsyError):
+    fmt = "Organization not found: '{organization_uid}'"

@@ -7,6 +7,7 @@ import httpx
 from .namespaces.appointments import AppointmentsAPI
 from .namespaces.auth import AuthAPI
 from .namespaces.customers import CustomersAPI
+from .namespaces.sites import SitesAPI
 
 
 logging.basicConfig(level=logging.WARNING)
@@ -16,8 +17,10 @@ __version__ = "0.0.13"
 
 
 class Antsy:
-    def __init__(self, refresh_token: str = None, access_token: str = None, version="v1") -> None:
+    def __init__(self, refresh_token: str = None, access_token: str = None, base_url: str = None, version: str = "v1") -> None:
         self.base_url = "https://api.antsy.app"
+        if base_url:
+            self.base_url = base_url
         self.version = version
 
         # Only fetch access token if refresh_token is provided and access_token is None
@@ -36,6 +39,7 @@ class Antsy:
         self._appointments = AppointmentsAPI(self, version)
         self._auth = AuthAPI(self, version)
         self._customers = CustomersAPI(self, version)
+        self._sites = SitesAPI(self, version)
 
     def _fetch_access_token(self, refresh_token: str) -> str:
         try:
@@ -62,3 +66,7 @@ class Antsy:
     @property
     def customers(self):
         return self._customers
+
+    @property
+    def sites(self):
+        return self._sites
