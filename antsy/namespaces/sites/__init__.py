@@ -14,14 +14,14 @@ logger = logging.getLogger(__name__)
 
 class SitesAPI:
     def __init__(self, antsy_client, version):
-        self.antsy_client = antsy_client
-        self.base_path = f"sites/{version}"
+        self.__antsy_client = antsy_client
+        self.__base_path = f"sites/{version}"
 
     def get(self, site_uid: str) -> Optional[Site]:
-        full_url = f"{self.antsy_client.base_url}/{self.base_path}/site/{site_uid}"
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/site/{site_uid}"
 
         try:
-            response = self.antsy_client.client.get(full_url).json()
+            response = self.__antsy_client.client.get(full_url).json()
         except HTTPStatusError as exc:
             logger.error("Error: %s", exc)
             return None
@@ -45,11 +45,11 @@ class SitesAPI:
 
         return site
 
-    def get_organization_sites(self, organization_uid: str) -> Optional[Organization]:
-        full_url = f"{self.antsy_client.base_url}/{self.base_path}/organization/{organization_uid}"
+    def get_organization_sites(self) -> Optional[Organization]:
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/organization"
 
         try:
-            response = self.antsy_client.client.get(full_url).json()
+            response = self.__antsy_client.client.get(full_url).json()
         except HTTPStatusError as exc:
             logger.error("Error: %s", exc)
             return None
@@ -58,7 +58,7 @@ class SitesAPI:
             if response.get("message") == "DATABASE_ERROR":
                 raise exceptions.AntsyError()
             if response.get("message") == "ORGANIZATION_NOT_FOUND":
-                raise exceptions.OrganizationNotFound(organization_uid=organization_uid)
+                raise exceptions.OrganizationNotFound(organization_uid="organization_uid")
 
             return None
 

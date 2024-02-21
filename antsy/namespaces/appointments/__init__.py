@@ -5,7 +5,7 @@ from typing import List, Optional
 from dateutil.parser import parse
 from httpx import HTTPStatusError
 
-from .models import Queue, QueueAppointment
+from .models import QueueAppointment
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -13,14 +13,14 @@ logger = logging.getLogger(__name__)
 
 class AppointmentsAPI:
     def __init__(self, antsy_client, version):
-        self.antsy_client = antsy_client
-        self.base_path = f"appointments/{version}"
+        self.__antsy_client = antsy_client
+        self.__base_path = f"appointments/{version}"
 
     def get_queue_appointments(self, queue_uid: str) -> Optional[List[QueueAppointment]]:
-        full_url = f"{self.antsy_client.base_url}/{self.base_path}/queue/{queue_uid}"
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/queue/{queue_uid}"
 
         try:
-            response = self.antsy_client.client.get(full_url).json()
+            response = self.__antsy_client.client.get(full_url).json()
         except HTTPStatusError as exc:
             logger.error(f"Error: {exc}")
             return None
@@ -29,7 +29,6 @@ class AppointmentsAPI:
             return None
 
         data = response.get("data")
-        queue = Queue.model_validate(data.get("queue"))
 
         output: List[QueueAppointment] = []
         for appointment in data.get("appointments"):

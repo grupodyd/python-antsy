@@ -7,5 +7,16 @@ class AccessToken(pydantic.BaseModel):
     access_token: str
 
 
+class Site(pydantic.BaseModel):
+    uid: str
+    name: str
+
+
+class Organization(pydantic.BaseModel):
+    uid: str
+    name: str
+
+
 class WhoAmI(pydantic.BaseModel):
-    identity: str
+    site: Site
+    organization: Organization

@@ -14,8 +14,8 @@ logger = logging.getLogger(__name__)
 
 class CustomersAPI:
     def __init__(self, antsy_client, version):
-        self.antsy_client = antsy_client
-        self.base_path = f"customers/{version}"
+        self.__antsy_client = antsy_client
+        self.__base_path = f"customers/{version}"
 
     def get(self, customer_uid: str) -> Optional[Customer]:
         """
@@ -27,10 +27,10 @@ class CustomersAPI:
         Returns:
             Optional[Customer]: The customer object if found, None otherwise.
         """
-        full_url = f"{self.antsy_client.base_url}/{self.base_path}/customer/{customer_uid}"
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/customer/{customer_uid}"
 
         try:
-            response = self.antsy_client.client.get(full_url).json()
+            response = self.__antsy_client.client.get(full_url).json()
         except HTTPStatusError as exc:
             logger.error("Error: %s", exc)
             return None
@@ -56,7 +56,7 @@ class CustomersAPI:
         Returns:
             Optional[Customer]: The created customer object if successful, None otherwise.
         """
-        full_url = f"{self.antsy_client.base_url}/{self.base_path}/customers"
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/customers"
 
         # Required fields
         request_data = {}
@@ -82,7 +82,7 @@ class CustomersAPI:
         request_data["receive_sms"] = kwargs.get("receive_sms")
 
         try:
-            response = self.antsy_client.client.post(full_url, json=request_data).json()
+            response = self.__antsy_client.client.post(full_url, json=request_data).json()
         except HTTPStatusError as exc:
             logger.error("Error: %s", exc)
             return None
@@ -133,7 +133,7 @@ class CustomersAPI:
         Returns:
             Optional[Customer]: The found customer object if found, else None.
         """
-        full_url = f"{self.antsy_client.base_url}/{self.base_path}/search"
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/search"
 
         # Required fields
         request_data = {}
@@ -146,7 +146,7 @@ class CustomersAPI:
                 raise exceptions.CustomerSearchRequiredField(field=key)
 
         try:
-            response = self.antsy_client.client.post(full_url, json=request_data).json()
+            response = self.__antsy_client.client.post(full_url, json=request_data).json()
         except HTTPStatusError as exc:
             logger.error("Error: %s", exc)
             return None

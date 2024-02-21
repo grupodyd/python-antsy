@@ -13,7 +13,7 @@ from .namespaces.sites import SitesAPI
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-__version__ = "0.0.13"
+__version__ = "0.0.14"
 
 
 class Antsy:
