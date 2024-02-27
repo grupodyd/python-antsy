@@ -41,7 +41,7 @@ class AppointmentsAPI:
 
         return output
 
-    def create(self, queue_appointment_uid: str, customer_uid: str, **kwargs):
+    def create(self, queue_appointment_uid: str, customer_uid: str, **kwargs) -> Optional[QueueAppointmentTask]:
         full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/appointments"
 
         request_data = {"queue_appointment_uid": queue_appointment_uid, "customer_uid": customer_uid}

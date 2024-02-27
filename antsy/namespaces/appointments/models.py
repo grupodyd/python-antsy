@@ -38,8 +38,8 @@ class QueueAppointment(pydantic.BaseModel):
 
 
 class QueueAppointmentTask(pydantic.BaseModel):
-    customer = Customer
-    site = Site
-    queue = Queue
-    appointment = Appointment
-    task = Task
+    customer: Customer
+    site: Site
+    queue: Queue
+    appointment: Appointment
+    task: Task
