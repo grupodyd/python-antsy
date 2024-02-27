@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from typing import Optional
 
 import pydantic
 
@@ -18,5 +19,5 @@ class Organization(pydantic.BaseModel):
 
 
 class WhoAmI(pydantic.BaseModel):
-    site: Site
     organization: Organization
+    site: Optional[Site] = None

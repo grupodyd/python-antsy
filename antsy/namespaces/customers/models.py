@@ -16,7 +16,6 @@ class Customer(pydantic.BaseModel):
     first_name: str
     last_name: str
     name: str = None
-    middle_name: str = None
     middle_name: Optional[str] = None
     verified: bool = False
     birthday: Optional[CustomerBirthDay] = None

@@ -72,3 +72,19 @@ class SiteNotFound(AntsyError):
 
 class OrganizationNotFound(AntsyError):
     fmt = "Organization not found: '{organization_uid}'"
+
+
+class InvalidCustomerUID(AntsyError):
+    fmt = "Invalid customer UID: '{customer_uid}'"
+
+
+class InvalidQueueAppointmentUID(AntsyError):
+    fmt = "Invalid queue appointment UID: '{queue_appointment_uid}'"
+
+
+class QueueAppointmentNotFound(AntsyError):
+    fmt = "Queue appointment not found: '{queue_appointment_uid}'"
+
+
+class QueueAppointmentNotAvailable(AntsyError):
+    fmt = "Queue appointment not available: '{queue_appointment_uid}'"

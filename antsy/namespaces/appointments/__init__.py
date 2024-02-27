@@ -5,7 +5,8 @@ from typing import List, Optional
 from dateutil.parser import parse
 from httpx import HTTPStatusError
 
-from .models import QueueAppointment
+from antsy import exceptions
+from .models import QueueAppointment, QueueAppointmentTask
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -41,4 +42,31 @@ class AppointmentsAPI:
         return output
 
     def create(self, queue_appointment_uid: str, customer_uid: str, **kwargs):
-        pass
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/appointments"
+
+        request_data = {"queue_appointment_uid": queue_appointment_uid, "customer_uid": customer_uid}
+
+        try:
+            response = self.__antsy_client.client.post(full_url, json=request_data).json()
+        except HTTPStatusError as exc:
+            logger.error("Error: %s", exc)
+            return None
+
+        if response.get("status") != "ok":
+            error_message = response.get("message")
+            match error_message:
+                case "CUSTOMER_ALREADY_EXISTS":
+                    raise exceptions.InvalidCustomerUID(customer_uid=customer_uid)
+                case "INVALID_QUEUE_APPOINTMENT_UID":
+                    raise exceptions.InvalidQueueAppointmentUID(queue_appointment_uid=queue_appointment_uid)
+                case "QUEUE_APPOINTMENT_NOT_FOUND":
+                    raise exceptions.QueueAppointmentNotFound(queue_appointment_uid=queue_appointment_uid)
+                case "QUEUE_APPOINTMENT_NOT_AVAILABLE":
+                    raise exceptions.QueueAppointmentNotAvailable(queue_appointment_uid=queue_appointment_uid)
+                case "DATABASE_ERROR":
+                    raise exceptions.AntsyError()
+                case _:
+                    return None
+
+        data = response.get("data")
+        return QueueAppointmentTask.model_validate(data)
