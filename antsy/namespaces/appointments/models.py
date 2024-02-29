@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 import datetime
+from typing import Optional
 
 import pydantic
 
@@ -33,8 +34,11 @@ class Task(pydantic.BaseModel):
 
 class QueueAppointment(pydantic.BaseModel):
     uid: str
-    day: datetime.date
     start_time: datetime.datetime
+    day: Optional[datetime.date] = None
+    status: Optional[str] = None
+    site: Optional[Site] = None
+    queue: Optional[Queue] = None
 
 
 class QueueAppointmentTask(pydantic.BaseModel):

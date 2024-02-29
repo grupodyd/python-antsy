@@ -70,3 +70,18 @@ class AppointmentsAPI:
 
         data = response.get("data")
         return QueueAppointmentTask.model_validate(data)
+
+    def get_customer_appointments(self, customer_uid: str) -> Optional[List[QueueAppointment]]:
+        full_url = f"{self.__antsy_client.base_url}/{self.__base_path}/customer/{customer_uid}"
+
+        try:
+            response = self.__antsy_client.client.get(full_url).json()
+        except HTTPStatusError as exc:
+            logger.error(f"Error: {exc}")
+            return None
+
+        if response.get("status") != "ok":
+            return None
+
+        data = response.get("data")
+        return [QueueAppointment.model_validate(appointment) for appointment in data.get("appointments")]
